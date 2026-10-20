@@ -206,7 +206,14 @@ final class LibsTest extends TestCase
 
     public function testFindLongestPeriodByProjectIncludesAllJointProjectsOfWinner(): void
     {
-        $result = Libs::findLongestPeriodByProject('14-winner-all-joint-projects.csv');
+        $result = $this->longestFromCsv(
+            "1,10,2020-01-01,2020-01-31\n"
+            . "2,10,2020-01-01,2020-01-31\n"
+            . "1,20,2020-03-01,2020-03-06\n"
+            . "2,20,2020-03-01,2020-03-06\n"
+            . "3,30,2020-02-01,2020-02-21\n"
+            . "4,30,2020-02-01,2020-02-21\n",
+        );
 
         self::assertSame(
             [
@@ -321,7 +328,11 @@ final class LibsTest extends TestCase
 
     public function testFindLongestPeriodByProjectMergesOverlappingEmployeeIntervals(): void
     {
-        $result = Libs::findLongestPeriodByProject('13-overlapping-employee-intervals.csv');
+        $result = $this->longestFromCsv(
+            "1,80,2026-10-20,2026-10-25\n"
+            . "1,80,2026-10-15,2026-10-22\n"
+            . "2,80,2026-10-15,2026-10-25\n",
+        );
 
         self::assertSame(
             [
