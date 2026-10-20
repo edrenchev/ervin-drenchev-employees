@@ -1,0 +1,30 @@
+{
+    "name": "stask/backend",
+    "description": "Stask backend",
+    "type": "project",
+    "require": {
+        "php": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stask\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stask\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse",
+        "analyse": "phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^13.4"
+    }
+}
