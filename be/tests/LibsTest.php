@@ -180,7 +180,7 @@ final class LibsTest extends TestCase
         );
     }
 
-    public function testFindLongestPeriodByProjectDoesNotSumDaysAcrossProjects(): void
+    public function testFindLongestPeriodByProjectSumsDaysAcrossProjects(): void
     {
         $result = $this->longestFromCsv(
             "1,100,2020-01-01,2020-01-21\n"
@@ -194,10 +194,11 @@ final class LibsTest extends TestCase
         self::assertSame(
             [
                 'pair' => [
-                    ['Employee ID #1' => 1, 'Employee ID #2' => 3, 'Days worked' => 21],
+                    ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Days worked' => 27],
                 ],
                 'data' => [
-                    ['Employee ID #1' => 1, 'Employee ID #2' => 3, 'Project ID' => 300, 'Days worked' => 21],
+                    ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Project ID' => 100, 'Days worked' => 11],
+                    ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Project ID' => 200, 'Days worked' => 16],
                 ],
             ],
             $result,
@@ -218,7 +219,7 @@ final class LibsTest extends TestCase
         self::assertSame(
             [
                 'pair' => [
-                    ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Days worked' => 31],
+                    ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Days worked' => 37],
                 ],
                 'data' => [
                     ['Employee ID #1' => 1, 'Employee ID #2' => 2, 'Project ID' => 10, 'Days worked' => 31],
