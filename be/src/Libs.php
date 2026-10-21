@@ -302,11 +302,25 @@ final class Libs
             return ['pair' => [], 'data' => []];
         }
 
-        $maxDays = max(array_column($overlaps, 'days'));
-        $winnerKeys = [];
+        /** @var array<string, array{emp1: int, emp2: int, days: int}> $totalsByPair */
+        $totalsByPair = [];
         foreach ($overlaps as $overlap) {
-            if ($overlap['days'] === $maxDays) {
-                $winnerKeys[$overlap['emp1'] . '-' . $overlap['emp2']] = true;
+            $pairKey = $overlap['emp1'] . '-' . $overlap['emp2'];
+            if (!isset($totalsByPair[$pairKey])) {
+                $totalsByPair[$pairKey] = [
+                    'emp1' => $overlap['emp1'],
+                    'emp2' => $overlap['emp2'],
+                    'days' => 0,
+                ];
+            }
+            $totalsByPair[$pairKey]['days'] += $overlap['days'];
+        }
+
+        $maxDays = max(array_column($totalsByPair, 'days'));
+        $winnerKeys = [];
+        foreach ($totalsByPair as $pairKey => $total) {
+            if ($total['days'] === $maxDays) {
+                $winnerKeys[$pairKey] = true;
             }
         }
 
@@ -324,7 +338,7 @@ final class Libs
                 $pair[] = [
                     'Employee ID #1' => $overlap['emp1'],
                     'Employee ID #2' => $overlap['emp2'],
-                    'Days worked' => $maxDays,
+                    'Days worked' => $totalsByPair[$pairKey]['days'],
                 ];
             }
 
