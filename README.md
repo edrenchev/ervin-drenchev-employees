@@ -71,7 +71,7 @@ The Files page lists uploaded CSV files and accepts a new one.
 
 ![Files](imgs/home.png)
 
-Opening a file shows the pair with the longest time worked together, the days per project, and the CSV rows.
+Opening a file shows the pair with the longest total time worked together across all shared projects, the days per project, and the CSV rows.
 
 ![Details](imgs/details.png)
 
